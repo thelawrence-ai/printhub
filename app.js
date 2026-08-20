@@ -4,6 +4,9 @@ const fileName = document.querySelector('#file-name');
 const success = document.querySelector('#success');
 const menuButton = document.querySelector('.menu-toggle');
 const mobileNav = document.querySelector('.mobile-nav');
+const ownerLoginButton = document.querySelector('#owner-login-button');
+const ownerModal = document.querySelector('#owner-modal');
+const ownerModalClose = document.querySelector('#owner-modal-close');
 const shopForm = document.querySelector('#shop-login-form');
 const shopMessage = document.querySelector('#shop-message');
 const ownerDesk = document.querySelector('#owner-desk');
@@ -13,8 +16,8 @@ const orderCount = document.querySelector('#order-count');
 const clearOrders = document.querySelector('#clear-orders');
 const ORDERS_KEY = 'printhub-orders';
 const OWNER_KEY = 'printhub-owner-session';
-const DEMO_OWNER = 'owner';
-const DEMO_PASSWORD = 'printdesk';
+const DEMO_OWNER = 'admin';
+const DEMO_PASSWORD = 'admin';
 
 const readOrders = () => {
   try {
@@ -38,6 +41,24 @@ const formatDate = (value) => new Intl.DateTimeFormat('en-IN', {
   dateStyle: 'medium',
   timeStyle: 'short'
 }).format(new Date(value));
+
+const openOwnerModal = () => {
+  ownerModal.hidden = false;
+  document.body.classList.add('modal-open');
+  setTimeout(() => shopForm?.querySelector('input[name="username"]')?.focus(), 0);
+};
+
+const closeOwnerModal = () => {
+  ownerModal.hidden = true;
+  document.body.classList.remove('modal-open');
+};
+
+ownerLoginButton?.addEventListener('click', openOwnerModal);
+ownerModalClose?.addEventListener('click', closeOwnerModal);
+ownerModal?.querySelector('[data-close-owner]')?.addEventListener('click', closeOwnerModal);
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && !ownerModal.hidden) closeOwnerModal();
+});
 
 menuButton?.addEventListener('click', () => {
   const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
@@ -150,6 +171,7 @@ ownerLogout?.addEventListener('click', () => {
   sessionStorage.removeItem(OWNER_KEY);
   ownerDesk.hidden = true;
   shopMessage.hidden = true;
+  closeOwnerModal();
 });
 
 clearOrders?.addEventListener('click', () => {
@@ -176,6 +198,8 @@ ordersList?.addEventListener('click', (event) => {
 });
 
 if (sessionStorage.getItem(OWNER_KEY) === 'true') {
+  ownerModal.hidden = false;
+  document.body.classList.add('modal-open');
   ownerDesk.hidden = false;
   renderOrders();
 }
