@@ -1,10 +1,11 @@
-# PrintHub flow revision checklist
+# Full working conversion checklist
 
-- [x] Remove unwanted sections, serial labels, section names, and duplicate or unclear actions.
-- [x] Build a no-login student order form with WhatsApp number, token or order number, PDF attachment, print type, message, and send action.
-- [x] Add shop login with the requested demo credentials and an orders view for submitted requests.
-- [x] Persist demo orders locally so new student requests appear in the shop view during the session.
-- [x] Replace the current logo treatment with a cleaner, technically precise PrintHub mark.
-- [x] Add Lawrence and the requested email to the footer.
-- [x] Improve mobile and desktop spacing, touch targets, and readability.
-- [x] Verify student and shop flows, then save and deliver a new checkpoint.
+- [x] Read the full-stack project guidance and upgrade the static project with backend, database, authentication, and file storage support.
+- [x] Define the order data model and secure shop access flow.
+- [x] Replace localStorage demo orders with persistent database-backed orders.
+- [x] Add PDF upload handling and secure order retrieval for shop staff.
+- [x] Remove all logo image usage while keeping the brand readable through typography.
+- [x] Verify student submission, shop login, order updates, responsive layout, and error states.
+- [x] Save and deliver the full working checkpoint.
+
+- [x] Verify the live shop login endpoint, authenticated orders query, invalid-login error, passing Vitest coverage, and production build.
