@@ -1,15 +1,60 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <meta name="theme-color" content="#f7f3eb" />
-    <meta name="description" content="Print, bind, and collect your study material without the queue. PrintHub is the student-first campus copy desk." />
-    <title>PrintHub — Student Xerox & Printing Center</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-    <script defer src="%VITE_ANALYTICS_ENDPOINT%/umami" data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f3eb">
+  <meta name="description" content="PrintHub — fast student printing, binding, and campus delivery.">
+  <title>PrintHub — Student Printing</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="PrintHub home">PrintHub<span>.</span></a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="#order">Print now</a>
+      <a href="#delivery">Delivery</a>
+      <a href="#contact">WhatsApp desk</a>
+    </nav>
+    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
+  </header>
+  <div class="mobile-nav" hidden>
+    <a href="#order">Print now</a>
+    <a href="#delivery">Delivery</a>
+    <a href="#contact">WhatsApp desk</a>
+  </div>
+
+  <main id="top">
+    <section class="hero shell">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> Student print desk</p>
+        <h1>Send the file.<br><em>Skip</em> the queue.</h1>
+        <p class="hero-text">No student login needed. Add your WhatsApp number, attach a PDF, tell us how to print, and we’ll message you with the order number.</p>
+        <div class="actions"><a class="button button-dark" href="#order">Print my notes <span>→</span></a><a class="button button-light" href="https://wa.me/919999999999" id="contact">Call the WhatsApp desk</a></div>
+        <div class="metrics"><div><strong>10 min</strong><small>Print estimate</small></div><div><strong>₹1</strong><small>B&amp;W / side</small></div><div><strong>Same day</strong><small>Campus drop</small></div></div>
+      </div>
+      <div class="hero-art"><img src="assets/hero.jpg" alt="Printed study notes beside a printer"><div class="coral-note"><span>Print · bind · deliver</span><strong>Your stack,<br>sorted.</strong></div></div>
+    </section>
+
+    <section class="order-section" id="order">
+      <div class="shell order-grid">
+        <div class="order-intro"><p class="eyebrow">Print request</p><h2>Tell us<br><em>the details.</em></h2><p>Your request goes to the print shop. We’ll check the file, confirm the price, and message your order number on WhatsApp.</p><div class="steps"><p><b>1</b> Add your details</p><p><b>2</b> Attach the PDF</p><p><b>3</b> We message you back</p></div></div>
+        <form class="order-form" id="order-form">
+          <div class="two-col"><label>WhatsApp number *<input name="whatsapp" required placeholder="98XXXXXXXX" inputmode="tel"></label><label>Token / order number<input name="token" placeholder="Optional"></label></div>
+          <label>Attach PDF *<span class="file-picker"><span class="file-icon">↥</span><span id="file-name">Choose your PDF<br><small>PDF only · up to 10 MB</small></span><input id="pdf" name="pdf" type="file" accept="application/pdf,.pdf" required></span></label>
+          <div class="two-col"><label>Print type<select name="printType"><option>Black &amp; white</option><option>Colour</option><option>Spiral binding</option></select></label><label>Receive it by<select name="delivery"><option>Counter pickup</option><option>Campus delivery</option></select></label></div>
+          <label>Message for the print shop *<textarea name="message" required placeholder="Example: pages 1–20, double side, staple top-left"></textarea></label>
+          <button class="button button-dark full" type="submit">Send print request <span>→</span></button>
+          <p class="form-note">No student login. Your PDF is sent through the order flow and the shop confirms the next step.</p>
+          <p class="success" id="success" hidden></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="delivery shell" id="delivery"><div class="delivery-copy"><p class="eyebrow">Pickup &amp; delivery</p><h2>Know when<br><em>it arrives.</em></h2><p>Counter pickup is free. Campus delivery is available for the library, hostel, or department gate.</p><div class="delivery-cards"><article><span>⌖</span><strong>Counter pickup</strong><p>Free · ready in 10–20 minutes<br>Campus Gate 2 · Shop 04</p></article><article><span>□</span><strong>Campus delivery</strong><p>From ₹20 · usually 30–45 minutes<br>Library, hostel, or department gate</p></article></div></div><img class="delivery-image" src="assets/delivery.jpg" alt="Packed notes ready for campus delivery"></section>
+  </main>
+
+  <footer id="footer"><div class="shell footer-inner"><div><p class="wordmark">PrintHub<span>.</span></p><p>Fast, simple printing for students — with no login required.</p></div><div><p>Created by <strong>Lawrence</strong></p><a href="mailto:thelawrence.ai@gmail.com">thelawrence.ai@gmail.com</a></div></div></footer>
+  <script src="app.js" defer></script>
+</body>
 </html>
