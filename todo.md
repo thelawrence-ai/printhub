@@ -9,3 +9,5 @@
 - [x] Save and deliver the full working checkpoint.
 
 - [x] Verify the live shop login endpoint, authenticated orders query, invalid-login error, passing Vitest coverage, and production build.
+
+- [ ] Push the complete working PrintHub project to a new private GitHub repository.
