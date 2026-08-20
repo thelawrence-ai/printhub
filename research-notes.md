@@ -13,3 +13,7 @@ The revised homepage loads successfully and exposes the expected service buttons
 ## Responsive verification
 
 The mobile capture keeps the large editorial headline legible, preserves the primary Browse print services action, collapses navigation into a menu button, and keeps the quick metrics readable without horizontal overflow. Desktop captures show the catalogue cards and the order builder working as a coherent quick-commerce-style sequence.
+
+## Student/shop revision verification
+
+The revised mobile layout has a compact header with a menu button, a comfortable two-action hero, readable metrics, and large touch targets. Desktop captures show the clearer student-first headline, new logo mark, and simplified navigation. The homepage now routes students directly into a form that requires WhatsApp, PDF, print type, and message, while shop login is separated behind a small header action. Orders are persisted in localStorage for the demo dashboard.

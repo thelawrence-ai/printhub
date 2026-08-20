@@ -69,3 +69,30 @@ button:focus-visible, a:focus-visible { outline: 2px solid #e9604c; outline-offs
   body { @apply bg-background text-foreground; }
   button:not(:disabled), [role="button"]:not([aria-disabled="true"]), [type="button"]:not(:disabled), [type="submit"]:not(:disabled), a[href] { @apply cursor-pointer; }
 }
+
+/* Flow components: large touch targets, readable form fields, and calm shop dashboard surfaces. */
+.field-label { display: flex; flex-direction: column; gap: .5rem; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(21,20,18,.64); }
+.field-input { width: 100%; border: 1px solid rgba(21,20,18,.16); border-radius: 6px; background: #f7f3eb; padding: .85rem .9rem; font: inherit; font-size: .9rem; letter-spacing: 0; text-transform: none; color: #151412; transition: border-color .18s ease, box-shadow .18s ease, background .18s ease; }
+.field-input::placeholder { color: rgba(21,20,18,.36); }
+.field-input:focus { border-color: #e9604c; background: #fffaf2; box-shadow: 0 0 0 3px rgba(233,96,76,.12); outline: none; }
+.primary-button, .secondary-button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: .55rem; border-radius: 999px; padding: .8rem 1.25rem; font-size: .85rem; font-weight: 700; transition: transform .18s cubic-bezier(.23,1,.32,1), background .18s ease, color .18s ease, box-shadow .18s ease; }
+.primary-button { background: #151412; color: #f7f3eb; box-shadow: 0 5px 0 rgba(21,20,18,.16); }
+.primary-button:hover { background: #e9604c; transform: translateY(-2px); box-shadow: 0 7px 0 #bc4537; }
+.primary-button:active { transform: translateY(1px); box-shadow: 0 2px 0 #bc4537; }
+.secondary-button { border: 1px solid rgba(21,20,18,.2); color: #151412; background: transparent; }
+.secondary-button:hover { border-color: #e9604c; color: #e9604c; background: #fffaf2; }
+.step-dot { display: grid; height: 28px; width: 28px; place-items: center; border-radius: 999px; background: #dce5d8; color: #45603f; font-size: .72rem; }
+.stat-card { border: 1px solid rgba(21,20,18,.12); background: #fffaf2; padding: 1.25rem 1.5rem; }
+.stat-number { font-family: 'Fraunces', serif; font-size: 2.9rem; font-weight: 600; line-height: 1; letter-spacing: -.06em; }
+.stat-label, .meta-label { margin-top: .35rem; font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(21,20,18,.46); }
+.status-pill { display: inline-flex; border-radius: 999px; padding: .35rem .6rem; font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.status-new { background: #f7ded7; color: #a53c2f; }
+.status-printing { background: #e7e0d4; color: #735d2f; }
+.status-ready { background: #dce5d8; color: #45603f; }
+@media (max-width: 639px) {
+  .container { padding-inline: 1rem; }
+  .section-title { font-size: clamp(2.8rem, 14vw, 4rem); }
+  .paper-card { box-shadow: 6px 8px 0 rgba(21,20,18,.07); }
+  .primary-button, .secondary-button { min-height: 50px; }
+  .field-input { min-height: 48px; }
+}
