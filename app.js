@@ -215,7 +215,8 @@ ordersList?.addEventListener('click', async (event) => {
 });
 
 api('/api/session').then(async (session) => {
-  if (!session.authenticated) return;
+  const directOwnerAccess = new URLSearchParams(window.location.search).get('owner') === '1';
+  if (!session.authenticated && !directOwnerAccess) return;
   openOwnerModal();
-  await loadOrders();
+  if (session.authenticated) await loadOrders();
 }).catch(() => {});

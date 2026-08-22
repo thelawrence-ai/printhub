@@ -3,59 +3,61 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f7f3eb">
-  <meta name="description" content="PrintHub — fast student printing, binding, and campus delivery.">
-  <title>PrintHub — Student Printing</title>
+  <meta name="theme-color" content="#f7f7f5">
+  <meta name="description" content="PrintHub — submit a student printing request.">
+  <title>PrintHub — Request Portal</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="site-header">
     <a class="wordmark" href="#top" aria-label="PrintHub home">PrintHub<span>.</span></a>
-    <nav class="desktop-nav" aria-label="Primary navigation">
-      <a href="#order">Print now</a>
-      <a href="#delivery">Delivery</a>
-      <a href="#contact">WhatsApp desk</a>
-    </nav>
-    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
+    <span class="header-note">Student print desk</span>
   </header>
-  <div class="mobile-nav" hidden>
-    <a href="#order">Print now</a>
-    <a href="#delivery">Delivery</a>
-    <a href="#contact">WhatsApp desk</a>
-  </div>
 
-  <main id="top">
-    <section class="hero shell">
-      <div class="hero-copy">
-        <p class="eyebrow"><span></span> Student print desk</p>
-        <h1>Send the file.<br><em>Skip</em> the queue.</h1>
-        <p class="hero-text">No student login needed. Add your WhatsApp number, attach a PDF, tell us how to print, and receive a confirmation on this page.</p>
-        <div class="actions"><a class="button button-dark" href="#order">Print my notes <span>→</span></a><a class="button button-light" href="https://wa.me/919999999999" id="contact">Call the WhatsApp desk</a></div>
-        <div class="metrics"><div><strong>10 min</strong><small>Print estimate</small></div><div><strong>₹1</strong><small>B&amp;W / side</small></div><div><strong>Same day</strong><small>Campus drop</small></div></div>
-      </div>
-      <div class="hero-art"><img src="assets/hero.jpg" alt="Printed study notes beside a printer"><div class="coral-note"><span>Print · bind · deliver</span><strong>Your stack,<br>sorted.</strong></div></div>
+  <main id="top" class="request-page">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">Print request portal</p>
+      <h1 id="page-title">Send your file.<br><em>We’ll handle the rest.</em></h1>
+      <p class="intro-copy">No account needed. Add your WhatsApp number, attach a PDF, and tell the print shop what you need.</p>
     </section>
 
-    <section class="order-section" id="order">
-      <div class="shell order-grid">
-        <div class="order-intro"><p class="eyebrow">Print request</p><h2>Tell us<br><em>the details.</em></h2><p>Your request is recorded on this page. The shop team can review the details and contact you using the number provided.</p><div class="steps"><p><b>1</b> Add your details</p><p><b>2</b> Attach the PDF</p><p><b>3</b> We message you back</p></div></div>
-        <form class="order-form" id="order-form">
-          <div class="two-col"><label>WhatsApp number *<input name="whatsapp" required placeholder="98XXXXXXXX" inputmode="tel"></label><label>Token / order number<input name="token" placeholder="Optional"></label></div>
-          <label>Attach PDF *<span class="file-picker"><span class="file-icon">↥</span><span id="file-name">Choose your PDF<br><small>PDF only · up to 10 MB</small></span><input id="pdf" name="pdf" type="file" accept="application/pdf,.pdf" required></span></label>
-          <div class="two-col"><label>Print type<select name="printType"><option>Black &amp; white — ₹1 / side</option><option>Colour — ₹5 / side</option><option>Spiral binding — from ₹30</option></select></label><label>Receive it by<select name="delivery"><option>Counter pickup — free</option><option>Campus delivery — from ₹20</option></select></label></div>
-          <label>Message for the print shop *<textarea name="message" required placeholder="Example: pages 1–20, double side, staple top-left"></textarea></label>
-          <button class="button button-dark full" type="submit">Send print request <span>→</span></button>
-          <p class="form-note">No student login. Your request stays on this page and is not redirected to WhatsApp.</p>
-          <p class="success" id="success" hidden></p>
-        </form>
+    <section class="request-section" id="order" aria-labelledby="request-title">
+      <div class="section-heading">
+        <p class="eyebrow">New request</p>
+        <h2 id="request-title">Print details</h2>
       </div>
+      <form class="order-form" id="order-form">
+        <div class="two-col">
+          <label>WhatsApp number *<input name="whatsapp" required placeholder="98XXXXXXXX" inputmode="tel" autocomplete="tel"></label>
+          <label>Token / order number<input name="token" placeholder="Optional" autocomplete="off"></label>
+        </div>
+        <label>Attach PDF *
+          <span class="file-picker">
+            <span class="file-icon">＋</span>
+            <span id="file-name">Choose a PDF<br><small>PDF only · up to 10 MB</small></span>
+            <input id="pdf" name="pdf" type="file" accept="application/pdf,.pdf" required>
+          </span>
+        </label>
+        <div class="two-col">
+          <label>Print type<select name="printType"><option>Black &amp; white — ₹1 / side</option><option>Colour — ₹5 / side</option><option>Spiral binding — from ₹30</option></select></label>
+          <label>Receive it by<select name="delivery"><option>Counter pickup — free</option><option>Campus delivery — from ₹20</option></select></label>
+        </div>
+        <label>Message for the print shop *<textarea name="message" required placeholder="Pages, sides, binding, or any other instructions"></textarea></label>
+        <button class="button button-dark full" type="submit">Send print request <span>→</span></button>
+        <p class="form-note">Your request stays on this page. The shop will contact you using the number provided.</p>
+        <p class="success" id="success" hidden></p>
+      </form>
     </section>
 
-    <section class="delivery shell" id="delivery"><div class="delivery-copy"><p class="eyebrow">Pickup &amp; delivery</p><h2>Know when<br><em>it arrives.</em></h2><p>Counter pickup is free. Campus delivery is available for the library, hostel, or department gate.</p><div class="delivery-cards"><article><span>⌖</span><strong>Counter pickup</strong><p>Free · ready in 10–20 minutes<br>Campus Gate 2 · Shop 04</p></article><article><span>□</span><strong>Campus delivery</strong><p>From ₹20 · usually 30–45 minutes<br>Library, hostel, or department gate</p></article></div></div><img class="delivery-image" src="assets/delivery.jpg" alt="Packed notes ready for campus delivery"></section>
+    <section class="service-note" aria-label="Service information">
+      <div><strong>Counter pickup</strong><span>Free · Campus Gate 2 · Shop 04</span></div>
+      <div><strong>Campus delivery</strong><span>From ₹20 · usually 30–45 minutes</span></div>
+      <div><strong>Need help?</strong><a href="mailto:thelawrence.ai@gmail.com">Contact the print desk</a></div>
+    </section>
   </main>
 
-  <div class="owner-modal" id="owner-modal" hidden><div class="owner-modal-backdrop" data-close-owner></div><section class="owner-modal-panel" role="dialog" aria-modal="true" aria-labelledby="owner-modal-title"><button class="owner-modal-close" id="owner-modal-close" type="button" aria-label="Close owner login">×</button><div class="owner-modal-login"><p class="eyebrow">Owner access</p><h2 id="owner-modal-title">Shop<br><em>login.</em></h2><p>Sign in to review requests, update statuses, and message students.</p><p class="owner-login-note">Authorized shop owners can sign in to manage incoming orders and contact students.</p><form class="shop-login-form" id="shop-login-form"><label>Username<input name="username" required autocomplete="username"></label><label>Password<input name="password" type="password" required autocomplete="current-password"></label><button class="button button-dark" type="submit">Open owner desk <span>→</span></button><p class="success" id="shop-message" hidden></p></form></div><div class="owner-desk" id="owner-desk" hidden><div class="owner-desk-head"><div><p class="eyebrow">Incoming requests</p><h3>Manage the<br><em>print queue.</em></h3></div><button class="button button-light" id="owner-logout" type="button">Log out</button></div><div class="owner-toolbar"><p id="order-count">0 requests</p><button class="button button-dark" id="clear-orders" type="button">Clear all orders</button></div><div class="orders-list" id="orders-list"><p class="empty-orders">No print requests yet. New requests will appear here.</p></div></div></section></div>
-  <footer id="footer"><div class="shell footer-inner"><div><p class="wordmark">PrintHub<span>.</span></p><p>Fast, simple printing for students — with no login required.</p><p class="footer-owner-note">Shop owners can log in to manage orders.</p></div><div><p>Owner access</p><button class="shop-login-link" id="owner-login-button" type="button">Owner login &amp; order desk →</button><p>Created by <strong>Lawrence</strong></p><a href="mailto:thelawrence.ai@gmail.com">thelawrence.ai@gmail.com</a></div></div></footer>
+  <div class="owner-modal" id="owner-modal" hidden><div class="owner-modal-backdrop" data-close-owner></div><section class="owner-modal-panel" role="dialog" aria-modal="true" aria-labelledby="owner-modal-title"><button class="owner-modal-close" id="owner-modal-close" type="button" aria-label="Close owner login">×</button><div class="owner-modal-login"><p class="eyebrow">Owner access</p><h2 id="owner-modal-title">Shop<br><em>login.</em></h2><p>Sign in to review requests, update statuses, and message students.</p><form class="shop-login-form" id="shop-login-form"><label>Username<input name="username" required autocomplete="username"></label><label>Password<input name="password" type="password" required autocomplete="current-password"></label><button class="button button-dark" type="submit">Open owner desk <span>→</span></button><p class="success" id="shop-message" hidden></p></form></div><div class="owner-desk" id="owner-desk" hidden><div class="owner-desk-head"><div><p class="eyebrow">Incoming requests</p><h3>Manage the<br><em>print queue.</em></h3></div><button class="button button-light" id="owner-logout" type="button">Log out</button></div><div class="owner-toolbar"><p id="order-count">0 requests</p><button class="button button-dark" id="clear-orders" type="button">Clear all orders</button></div><div class="orders-list" id="orders-list"><p class="empty-orders">No print requests yet. New requests will appear here.</p></div></div></section></div>
+  <footer><div class="footer-inner"><span class="wordmark">PrintHub<span>.</span></span><span>Simple printing for students.</span></div></footer>
   <script src="app.js" defer></script>
 </body>
 </html>

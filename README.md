@@ -62,5 +62,5 @@ Username: Admin
 Password: Admin
 ```
 
-The demo password is still stored by the server as an scrypt hash. Do not reuse these credentials or expose the demo deployment to real student documents. For any non-demo deployment, replace the credentials immediately and keep the owner access link visually unobtrusive but available in the footer.
+The demo password is still stored by the server as an scrypt hash. Do not reuse these credentials or expose the demo deployment to real student documents. For any non-demo deployment, replace the credentials immediately. The public UI intentionally exposes only the request portal; authorized owners can open the owner desk directly at `/?owner=1`.
 
