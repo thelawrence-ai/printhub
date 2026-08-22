@@ -52,3 +52,15 @@ Production CI should also run a lockfile-based dependency audit, secret scanning
 | `PORT` | No | HTTP port; defaults to `3000` |
 | `HOST` | No | Bind host; defaults to `0.0.0.0` |
 
+
+## Demo access
+
+This repository is configured for a demo workflow. Students can submit print requests from the public form without an account or owner login. The demo owner desk uses:
+
+```text
+Username: Admin
+Password: Admin
+```
+
+The demo password is still stored by the server as an scrypt hash. Do not reuse these credentials or expose the demo deployment to real student documents. For any non-demo deployment, replace the credentials immediately and keep the owner access link visually unobtrusive but available in the footer.
+
