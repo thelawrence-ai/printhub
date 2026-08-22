@@ -1,17 +1,54 @@
 # PrintHub Portal
 
-PrintHub is a student printing portal with public order submission and a protected shop-owner order desk. Orders and PDF files are stored on the server, while owner authentication uses an HTTP-only signed session cookie.
+PrintHub is a student printing portal with public order submission and a protected shop-owner order desk. Orders and PDF files are stored on the server, while owner authentication uses an expiring HTTP-only signed session cookie and an scrypt password hash.
 
 ## Run locally
 
-Use Node.js 18 or newer. Copy `.env.example` to `.env`, set a long random `SESSION_SECRET`, and choose the owner username and password. Then start the portal with `npm start` and open `http://localhost:3000`.
+Use Node.js 18 or newer. Generate a password hash:
 
-The server stores order metadata in `data/orders.json` and uploaded PDFs in `data/files/`. These paths must be on persistent storage in production and should be backed up according to the shop’s retention policy.
+```bash
+npm install
+npm run hash-password -- "a-long-local-password"
+```
+
+Copy `.env.example` to `.env`, replace `OWNER_PASSWORD_HASH` with the generated value, set a random `SESSION_SECRET` of at least 32 characters, and export the variables before starting:
+
+```bash
+set -a; . ./.env; set +a
+npm start
+```
+
+The server refuses to start if the username, password hash, or session secret is missing or unsafe. There are no default credentials. Open `http://localhost:3000` after startup.
+
+The server stores order metadata in `DATA_DIR/orders.json` and uploaded PDFs in `DATA_DIR/files/`. The JSON writer serializes and atomically replaces updates, which is safer for a single process, but this remains a transitional storage layer rather than a substitute for a database.
 
 ## Production deployment
 
-The owner login requires the Node server and will not work when the files are opened with `file://` or hosted as a static GitHub Pages site. Deploy the repository as a Node web service. A `render.yaml` manifest is included for Render; set `OWNER_USERNAME` and `OWNER_PASSWORD` in the service environment, keep the generated `SESSION_SECRET`, and use the resulting service URL for both student orders and owner login.
+The owner login requires the Node server and will not work when the files are opened with `file://` or hosted as a static GitHub Pages site. Deploy the repository as a Node web service. A `render.yaml` manifest is included for Render; configure `OWNER_USERNAME`, `OWNER_PASSWORD_HASH`, and `SESSION_SECRET` as service secrets. Never configure or commit a plaintext owner password.
 
-Run the server behind HTTPS and a reverse proxy or managed Node hosting service. Set `OWNER_USERNAME`, `OWNER_PASSWORD`, `SESSION_SECRET`, `PORT`, and `HOST` through the hosting provider’s environment configuration. Do not commit `.env`, runtime order data, uploaded PDFs, or production credentials.
+Run the server behind HTTPS. Production automatically adds the `Secure` cookie attribute; `COOKIE_SECURE=true` can be used when HTTPS is terminated outside the process. Set `DATA_DIR` to a persistent mount. A free or ephemeral web-service filesystem must not be treated as durable storage.
 
-The current portal provides server-side authentication, persistent order creation, authenticated order listing, protected PDF links, order status updates, order deletion, and WhatsApp message links. Before handling sensitive student documents at scale, add a managed database, object storage, malware scanning, rate limiting, automated backups, password hashing or external identity management, and a documented document-retention policy.
+Before handling sensitive student documents at scale, migrate order metadata to a managed database and PDFs to private object storage. Add malware scanning and quarantine, automated encrypted backups with restore tests, a documented retention/deletion policy, and an external identity provider or managed session store. The application includes basic login throttling, strict field validation, PDF signature validation, security headers, atomic serialized JSON writes, protected file downloads, and structured error logging, but infrastructure-level controls are still required.
+
+## Verification
+
+Run the built-in test suite with:
+
+```bash
+npm test
+```
+
+Production CI should also run a lockfile-based dependency audit, secret scanning, and deployment smoke tests.
+
+## Environment variables
+
+| Variable | Required | Purpose |
+|---|---:|---|
+| `OWNER_USERNAME` | Yes | Owner login name, 3–80 safe characters |
+| `OWNER_PASSWORD_HASH` | Yes | `scrypt$N$r$p$salt$hash` output from the hash utility |
+| `SESSION_SECRET` | Yes | At least 32 random characters for cookie signing |
+| `DATA_DIR` | No | Persistent data directory; defaults to `./data` |
+| `COOKIE_SECURE` | No | Set `true` for HTTPS outside production mode |
+| `PORT` | No | HTTP port; defaults to `3000` |
+| `HOST` | No | Bind host; defaults to `0.0.0.0` |
+

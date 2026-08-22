@@ -2,7 +2,11 @@ services:
   - type: web
     name: printhub-portal
     runtime: node
-    plan: free
+    plan: starter
+    disk:
+      name: printhub-data
+      mountPath: /var/data
+      sizeGB: 1
     buildCommand: npm install
     startCommand: npm start
     healthCheckPath: /api/health
@@ -10,8 +14,10 @@ services:
     envVars:
       - key: OWNER_USERNAME
         sync: false
-      - key: OWNER_PASSWORD
+      - key: OWNER_PASSWORD_HASH
         sync: false
+      - key: DATA_DIR
+        value: /var/data
       - key: SESSION_SECRET
         generateValue: true
       - key: NODE_VERSION
