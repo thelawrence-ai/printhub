@@ -162,7 +162,10 @@ shopForm?.addEventListener('submit', async (event) => {
     setOwnerMessage('Owner desk unlocked.');
     await loadOrders();
   } catch (error) {
-    setOwnerMessage(error.message, true);
+    const message = error.message === 'Failed to fetch'
+      ? 'The owner portal is not connected to its server. Open the deployed Node portal URL, not a static GitHub Pages URL.'
+      : error.message;
+    setOwnerMessage(message, true);
   }
 });
 

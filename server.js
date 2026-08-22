@@ -75,6 +75,10 @@ const server = http.createServer(async (request, response) => {
     const url = new URL(request.url, `http://${request.headers.host || 'localhost'}`);
     const pathname = decodeURIComponent(url.pathname);
 
+    if (pathname === '/api/health' && request.method === 'GET') {
+      return json(response, 200, { ok: true, service: 'printhub-portal' });
+    }
+
     if (pathname === '/api/session' && request.method === 'GET') {
       return json(response, 200, { authenticated: validSession(request) });
     }
