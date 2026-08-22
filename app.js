@@ -147,6 +147,7 @@ form?.addEventListener('submit', async (event) => {
       })
     });
     success.hidden = false;
+    success.style.background = 'var(--sage)';
     success.textContent = `Order ${payload.order.id} was submitted. The shop will contact you using the number provided.`;
     form.reset();
     fileName.innerHTML = 'Choose your PDF<br><small>PDF only · up to 10 MB</small>';

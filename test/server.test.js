@@ -42,3 +42,11 @@ test('authenticates and manages a valid order', async () => {
   assert.equal(update.status, 200);
   assert.equal((await update.json()).order.status, 'Printing');
 });
+
+test('allows public request submission while protecting uploaded files', async () => {
+  const order = await jsonRequest('/api/orders', { method: 'POST', body: JSON.stringify({ whatsapp: '9812345678', message: 'Public demo request', fileName: 'public.pdf', fileData: 'data:application/pdf;base64,JVBERi0xLjQK', printType: 'Colour — ₹5 / side', delivery: 'Campus delivery — from ₹20' }) });
+  assert.equal(order.status, 201);
+  const payload = await order.json();
+  const file = await fetch(`${base}/api/orders/${payload.order.id}/file`);
+  assert.equal(file.status, 401);
+});
