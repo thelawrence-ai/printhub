@@ -20,8 +20,14 @@ const api = async (path, options = {}) => {
     ...options,
     headers: { 'Content-Type': 'application/json', ...(options.headers || {}) }
   });
-  const payload = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(payload.error || 'The portal request failed.');
+  const contentType = response.headers.get('content-type') || '';
+  const payload = contentType.includes('application/json') ? await response.json().catch(() => ({})) : {};
+  if (!response.ok) {
+    if (!contentType.includes('application/json') && path.startsWith('/api/')) {
+      throw new Error('This demo is open on a static website. Open the deployed Node portal URL to send print requests.');
+    }
+    throw new Error(payload.error || 'The portal request failed.');
+  }
   return payload;
 };
 
